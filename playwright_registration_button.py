@@ -4,13 +4,20 @@ with sync_playwright() as p:
     browser = p.chromium.launch(headless=False)
     page = browser.new_page()
 
-    page.goto("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/login")
+    page.goto("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration")
+
+    registration_button = page.get_by_test_id('registration-page-registration-button')
+    expect(registration_button).to_be_disabled()
 
     # Заполняем поле email
-    login_form_email_input = page.get_by_test_id('login-form-email-input').locator('input')
-    login_form_email_input.fill("user.name@gmail.com")
+    registration_form_email_input = page.get_by_test_id('registration-form-email-input').locator('input')
+    registration_form_username_input = page.get_by_test_id('registration-form-username-input').locator('input')
+    registration_form_password_input = page.get_by_test_id('registration-form-password-input').locator('input')
 
-    login_button = page.get_by_test_id('login-page-login-button')
-    expect(login_button).not_to_be_disabled()
+    registration_form_email_input.fill("user.name@gmail.com")
+    registration_form_username_input.fill("username")
+    registration_form_password_input.fill("password")
 
+    registration_button = page.get_by_test_id('registration-page-registration-button')
+    expect(registration_button).to_be_enabled()
     page.wait_for_timeout(5000)
