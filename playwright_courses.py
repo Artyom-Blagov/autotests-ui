@@ -24,4 +24,12 @@ with sync_playwright() as playwright:
     page = context.new_page()
 
     page.goto('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses')
-    expect('').to_be_visible()
+    title_courses = page.get_by_test_id('courses-list-toolbar-title-text')
+    icon_courses = page.get_by_test_id('courses-list-empty-view-icon')
+    title_text_courses = page.get_by_test_id('courses-list-empty-view-title-text')
+    description_text_courses = page.get_by_test_id('courses-list-empty-view-description-text')
+    expect(title_courses).to_be_visible()
+    expect(icon_courses).to_be_visible()
+    expect(title_text_courses).to_be_visible()
+    expect(description_text_courses).to_be_visible()
+
