@@ -12,3 +12,7 @@ def test_assert_postivie_case():
 
 def test_assert_negative_case():
     assert (2 + 2) == 5, "(2+2) != 5"
+
+def test_example():
+    x = 5
+    assert x == 6
