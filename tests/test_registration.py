@@ -1,8 +1,10 @@
+import pytest
+from playwright.sync_api import sync_playwright, expect
 
 
-def test_succesful_registration():
-    from playwright.sync_api import sync_playwright, expect
-
+@pytest.mark.regression
+@pytest.mark.registration
+def test_successful_registration():
     with sync_playwright() as playwright:
         # Открываем браузер и создаем новую страницу
         browser = playwright.chromium.launch(headless=False)
