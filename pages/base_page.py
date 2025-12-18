@@ -5,9 +5,7 @@ class BasePage:
         self.page = page
 
     def visit(self, url: str):
-        self.page.goto("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/login", wait_until="networkidle")
+        self.page.goto("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration", wait_until="networkidle")
 
     def reload(self):
         self.page.reload(wait_until="networkidle")
-
-    

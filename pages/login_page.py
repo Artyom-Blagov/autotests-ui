@@ -2,7 +2,7 @@ from pages.base_page import BasePage
 from playwright.sync_api import Page, expect
 
 class LoginPage(BasePage):
-    def __init__(self, page: Page):
+    def __init__(self, page):
         super().__init__(page)
 
         self.email_input = page.get_by_test_id('login-form-email-input').locator('input')
