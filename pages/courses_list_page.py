@@ -1,4 +1,4 @@
-from playwright.async_api import Page, expect
+from playwright.sync_api import Page, expect
 from pages.base_page import BasePage
 
 
@@ -27,7 +27,7 @@ class CoursesListPage(BasePage):
         expect(self.courses_title).to_be_visible()
         expect(self.courses_title).to_have_text("Courses")
 
-     def check_visible_empty_view(self):
+    def check_visible_empty_view(self):
         expect(self.empty_view_icon).to_be_visible()
 
         expect(self.empty_view_title).to_be_visible()

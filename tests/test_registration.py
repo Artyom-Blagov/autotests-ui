@@ -10,6 +10,4 @@ def test_successful_registration(registration_page: RegistrationPage, dashboard_
     registration_page.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration")
     registration_page.fill_registration_form(email="user.name@gmail.com",username="username", password= "password")
     registration_page.click_registration_button()
-    registration_page.page.wait_for_timeout(2000)
     dashboard_page.check_dashboard_title()
-    dashboard_page.page.wait_for_timeout(2000)

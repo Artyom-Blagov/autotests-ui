@@ -1,7 +1,8 @@
 from playwright.sync_api import Page, expect
-from pages.registration_page import RegistrationPage
 
-class DashboardPage(RegistrationPage):
+from pages.base_page import BasePage
+
+class DashboardPage(BasePage):
     def __init__(self, page: Page):
         super().__init__(page)
 
