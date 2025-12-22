@@ -20,7 +20,7 @@ class CreateCoursePage(BasePage):
         self.create_course_exercises_toolbar = CreateCourseExercisesToolbarViewComponent(page)
         self.exercises_empty_view = EmptyViewComponent(page, 'create-course-exercises')
 
-    def check_visible(self):
+    def check_visible_exercises_empty_view(self):
         self.exercises_empty_view.check_visible(
             title = 'There is no exercises',
             description = 'Click on "Create exercise" button to create new exercise',
