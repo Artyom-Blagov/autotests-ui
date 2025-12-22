@@ -9,7 +9,6 @@ class CourseViewComponent(BaseComponent):
         super().__init__(page)
 
         self.menu = CourseViewMenuComponent(page)
-
         self.title = Text(page,'course-widget-title-text',name='Title')
         self.image = Text(page,'course-preview-image',name='Preview image')
         self.max_score_text = Text(page,'course-max-score-info-row-view-text',name='Max Score')
