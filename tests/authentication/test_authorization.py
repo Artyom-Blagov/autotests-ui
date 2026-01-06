@@ -53,6 +53,7 @@ class TestAuthorization:
         dashboard_page.navbar.check_visible(settings.test_user.username)
         dashboard_page.sidebar.check_visible()
 
+    @pytest.mark.xdist_group(name="authorization-group")
     @pytest.mark.parametrize(
         'email, password',
         [
@@ -69,7 +70,6 @@ class TestAuthorization:
             login_page: LoginPage,
             email: str, password: str
     ):
-
         login_page.visit(AppRoute.LOGIN)
         login_page.login_form.fill(email, password)
         login_page.login_form.check_visible(email, password)
