@@ -30,19 +30,57 @@ jobs:
       - name: Run Playwright tests with pytest and generate Allure results
         run: |
           pytest -m regression --alluredir=./allure-results --numprocesses 2
-          
+
+      - name: Restore Coverage history
+        uses: actions/cache/restore@v5
+        with:
+          path: coverage-history.json
+          key: coverage-history-${{ github.run_id }}
+          restore-keys: |
+            coverage-history-
+
+      - name: Generate Coverage report
+        run: |
+          ui-coverage-tool save-report
+
+      - name: Cache Coverage history
+        if: always()
+        uses: actions/cache/save@v5
+        with:
+          path: coverage-history.json
+          key: coverage-history-${{ github.run_id }}
+
+      - name: Upload Coverage results
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: coverage-report
+          path: coverage.html
+
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: allure-results
+          path: allure-results
+
   publish-report:
+    if: always()
     needs: run-tests
     runs-on: ubuntu-latest
 
     steps:
-      - name: Get Allure history
+      - name: Check out repository
         uses: actions/checkout@v6.0.1
-        if: always()
-        continue-on-error: true
         with:
           ref: gh-pages
           path: gh-pages
+
+      - name: Download Allure results
+        uses: actions/download-artifact@v6
+        with:
+          name: allure-results
+          path: allure-results
 
       - name: Allure Report action from marketplace
         uses: simple-elf/allure-report-action@v1.13
@@ -56,6 +94,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./allure-history
+          publish_dir: allure-history
           publish_branch: gh-pages
-          force_orphan: true
+
